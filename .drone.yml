@@ -1,0 +1,23 @@
+pipeline:
+  build:
+    image: ubuntu:16.04
+    commands:
+      - apt update --yes
+      - apt install --yes cmake ${OPTIONAL_DEPS}
+      - mkdir build
+      - cd build
+      - cmake ..
+      - make
+      - make test
+      
+
+matrix:
+  OPTIONAL_DEPS:
+    - ""
+    - libhdf5-dev
+    - libopenmpi-dev
+    - swig
+    - libhdf5-openmpi-dev libopenmpi-dev
+    - libhdf5-dev swig
+    - libopenmpi-dev swig
+    - libhdf5-openmpi-dev libopenmpi-dev swig
